@@ -1,0 +1,79 @@
+{% extends 'admin/index.html' %}
+{% load static %}
+{% block admintitle %} Dish {% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+{% endblock %}
+{% block content %}
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Dish</h1>
+                </div>
+                <div class="col-sm-6">
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <a href="{% url 'dish:create' %}" class="btn btn-primary">Add New</a>
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <table id="dish" class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th>SN</th>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Slug</th>
+                                <th>Price</th>
+                                <th>Image</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for dish in dish %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ dish.name }}</td>
+                                <td>{{ dish.category }}</td>
+                                <td>{{ dish.slug }}</td>
+                                <td>{{ dish.price }}</td>
+                                <td><img src="{{ dish.image.url }}" style="width: 50px; height: 50px;" alt=""></td>
+                                <td>
+{#                                    <a href="{% url 'dish:edit' dish.id %}"><i class="fas fa-edit"></i></a>#}
+                                    <a href="{{ dish.get_absolute_url }}"><i class="fas fa-edit"></i></a>
+                                    <a href="{{ dish.get_url }}" class="delete"><i class="fas fa-trash" style="color: red;" onclick="deleteMessage();"></i></a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% block script %}
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $("#dish").DataTable();
+
+        function deleteMessage() {
+            $('.delete').on('click', function () {
+                alert("Are you sure, you want to delete this dish?");
+            })
+        }
+    </script>
+{% endblock %}

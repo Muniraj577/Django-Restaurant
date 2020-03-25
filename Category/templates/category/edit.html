@@ -1,0 +1,47 @@
+{% extends 'admin/index.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block admintitle %}Edit Category{% endblock %}
+{% block css %}
+{% endblock %}
+{% block content %}
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Edit Category</h1>
+                </div>
+                <div class="col-sm-6">
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            Edit Category
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <form action="{% url 'category:edit' category.id %}" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                {{ form.name|as_crispy_field }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.image|as_crispy_field }}
+                                <img src="{{ category.image.url }}" alt="" style="width: 50px; height: 50px;">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary mt-1">Update</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

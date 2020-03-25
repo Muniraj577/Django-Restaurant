@@ -1,0 +1,58 @@
+{% extends 'admin/index.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block admintitle %}Create Dish{% endblock %}
+{% block css %}
+{% endblock %}
+{% block content %}
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Create Dish</h1>
+                </div>
+                <div class="col-sm-6">
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            Create Dish
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <form action="{% url 'dish:create' %}" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                {{ form.name|as_crispy_field }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.category|as_crispy_field }}
+                            </div>
+                            <div class="form-group">
+                                <label for="price">Price</label>
+                                <input type="text" name="price" class="form-control">
+                                {% for field in form %}
+                                    <div class="fieldWrapper">
+                                        <span class="text-danger">{{ field.errors }}</span>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div class="form-group">
+                                {{ form.image|as_crispy_field }}
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary mt-1">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

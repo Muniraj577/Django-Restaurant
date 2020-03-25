@@ -1,0 +1,49 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %} Login {% endblock %}
+{% block content %}
+    <div class="content-header">
+        <div class="container">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">
+                        <small></small>
+                    </h1>
+                </div>
+                <div class="col-sm-6">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <form action="{% url 'accounts:login' %}" method="POST">
+                                {% csrf_token %}
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="username">Username:</label>
+                                        <input type="text" name="username" class="form-control"
+                                               data-title="Enter User Name">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="password">Password:</label>
+                                        <input type="password" name="password" class="form-control"
+                                               data-title="Enter Password">
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary">Login</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
