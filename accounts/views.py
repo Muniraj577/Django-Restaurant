@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from .forms import RegisterForm, LoginForm
-from django.http import HttpResponseRedirect
+from django.contrib.auth.hashers import check_password
 
 
 def register(request):
@@ -36,6 +36,9 @@ def register(request):
                 user.save()
                 auth.login(request, user)
                 return redirect('frontend:index')
+        return render(request, 'accounts/register.html', {
+                'form': form,
+            })
     else:
         form = RegisterForm()
         return render(request, 'accounts/register.html', {'form': form})
@@ -52,11 +55,10 @@ def login(request):
             auth.login(request, user)
             return redirect('frontend:index')
         else:
-            form = LoginForm(request.POST)
-            if form.cleaned_data['username'] != user.username:
+            if request.user.username != request.POST['username']:
                 messages.error(request, 'Username do not match.')
                 return redirect('accounts:login')
-            elif form.cleaned_data['password'] != user.password:
+            elif request.user.password != request.POST['password']:
                 messages.error(request, 'Password do not match')
                 return redirect('accounts:login')
     else:

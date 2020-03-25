@@ -24,6 +24,12 @@
                         <div class="card-body">
                             <form action="{% url 'accounts:login' %}" method="POST">
                                 {% csrf_token %}
+                                <div>
+                                    {% for message in messages %}
+                                        <li{% if message.tags %}
+                                            class="text-danger"{% endif %}>{{ message }}</li>
+                                    {% endfor %}
+                                </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="username">Username:</label>
