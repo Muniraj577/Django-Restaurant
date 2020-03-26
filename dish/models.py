@@ -25,4 +25,6 @@ class Dish(models.Model):
     def get_url(self):
         return reverse('dish:delete', args=[str(self.id)])
 
+    
+
 

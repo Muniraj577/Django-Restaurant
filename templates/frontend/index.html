@@ -13,12 +13,12 @@
                     <h1 class="m-0 text-dark">
                         <small></small>
                     </h1>
-                </div><!-- /.col -->
+                </div>
                 <div class="col-sm-6">
 
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
+                </div>
+            </div>
+        </div>
     </div>
     <div class="content">
         <div class="container">
@@ -99,7 +99,7 @@
                                                 <h4>{{ dish.name }} <span>Rs. {{ dish.price }}</span></h4>
                                                 {#                                            <p>Aperiam tempore sit,perferendis numquam repudiandae porro voluptate dicta#}
                                                 {#                                                saepe facilis.</p>#}
-                                                <p class="btn btn-primary">Order Now</p>
+                                                <a href="{% url 'frontend:detail' dish.id %}" class="btn btn-primary">Order Now</a>
                                             </div>
                                         </div>
                                     </div>

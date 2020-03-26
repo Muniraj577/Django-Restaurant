@@ -1,13 +1,13 @@
 from django.shortcuts import render, redirect
 from .forms import DishForm
 from .models import Dish
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-
 
 
 # Create your views here.
 
-@login_required
+
 def index(request):
     dish = Dish.objects.all()
     return render(request, 'dish/index.html', {'dish': dish, 'dish_index': 'active'})
@@ -43,3 +43,5 @@ def delete(request, pk=id):
     dish = Dish.objects.get(pk=pk)
     dish.delete()
     return redirect('dish:index')
+
+

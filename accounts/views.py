@@ -4,7 +4,6 @@ from django.contrib import messages
 from .forms import RegisterForm, LoginForm
 from django.contrib.auth.hashers import check_password
 
-
 def register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
@@ -49,7 +48,7 @@ def login(request):
         username = request.POST['username']
         password = request.POST['password']
 
-        user = auth.authenticate(username=username, password=password)
+        user = auth.authenticate(request, username=username, password=password)
 
         if user is not None:
             auth.login(request, user)
@@ -61,6 +60,7 @@ def login(request):
             elif request.user.password != request.POST['password']:
                 messages.error(request, 'Password do not match')
                 return redirect('accounts:login')
+
     else:
         return render(request, 'accounts/login.html')
 

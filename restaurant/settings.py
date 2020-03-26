@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'Category.apps.CategoryConfig',
     'dish.apps.DishConfig',
+    'cart.apps.CartConfig',
 ]
 
 MIDDLEWARE = [
@@ -138,3 +139,4 @@ STATICFILES_DIRS = [
 ]
 LOGOUT_REDIRECT_URL = '/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+CART_SESSION_ID = 'cart'

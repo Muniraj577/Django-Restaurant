@@ -1,0 +1,70 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+{% block title %} Dish Detail Page {% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+{% endblock %}
+{% block content %}
+    <div class="content-wrapper">
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Product Detail</h1>
+                    </div>
+                    <div class="col-sm-6">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="content">
+            <div class="card card-solid">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 col-sm-6">
+                            <h3 class="d-inline-block d-sm-none">LOWA Men’s Renegade GTX Mid Hiking Boots Review</h3>
+                            <div class="col-12">
+                                <img src="{{ dish.image.url }}" class="product-image" alt="{{ dish.name }}">
+                            </div>
+                            <div class="col-12 product-image-thumbs">
+
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <h3 class="my-3">{{ dish.name }}</h3>
+                            <div class="bg-gray py-2 px-3 mt-4">
+                                <h2 class="mb-0">
+                                    Price: Rs. {{ dish.price }}
+                                </h2>
+                            </div>
+                            <div class="mt-4">
+                                     {{ item.update_quantity_form.quantity }}
+                                     {{ item.update_quantity_form.update }}
+                            </div>
+                            <form action="{% url 'cart:cart_add' dish.id %}" method="POST">
+                                {% csrf_token %}
+                                {{ cart_dish_form }}
+                                <div class="mt-4">
+                                <button type="submit" class="btn btn-primary btn-lg btn-flat">
+                                    <i class="fas fa-cart-plus fa-lg mr-2"></i>
+                                    Add to Cart
+                                </button>
+
+                                {#                <div class="btn btn-default btn-lg btn-flat">#}
+                                {#                  <i class="fas fa-heart fa-lg mr-2"></i>#}
+                                {#                  Add to Wishlist#}
+                                {#                </div>#}
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}
+{% block script %}
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+{% endblock %}
