@@ -1,8 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
+from cart.cart import Cart
 from .forms import RegisterForm, LoginForm
+from django.conf import settings
 from django.contrib.auth.hashers import check_password
+
 
 def register(request):
     if request.method == 'POST':
@@ -36,14 +39,15 @@ def register(request):
                 auth.login(request, user)
                 return redirect('frontend:index')
         return render(request, 'accounts/register.html', {
-                'form': form,
-            })
+            'form': form,
+        })
     else:
         form = RegisterForm()
         return render(request, 'accounts/register.html', {'form': form})
 
 
 def login(request):
+    cart = Cart(request)
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -62,7 +66,7 @@ def login(request):
                 return redirect('accounts:login')
 
     else:
-        return render(request, 'accounts/login.html')
+        return render(request, 'accounts/login.html', {'cart': cart})
 
 
 def logout(request):
