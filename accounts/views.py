@@ -7,6 +7,11 @@ from django.conf import settings
 from django.contrib.auth.hashers import check_password
 
 
+def user_lists(request):
+    users = User.objects.all()
+    return render(request, 'accounts/user_list.html', {'users': users, 'user': 'active'})
+
+
 def register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)

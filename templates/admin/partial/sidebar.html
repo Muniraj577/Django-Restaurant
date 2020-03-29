@@ -26,6 +26,12 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
+                    <a href="{% url 'accounts:users' %}" class="nav-link {{ user }}">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>Users</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{% url 'category:index' %}" class="nav-link {{ category_index }}">
                         <i class="nav-icon fas fa-pizza-slice"></i>
                         <p>Category</p>
@@ -35,6 +41,12 @@
                     <a href="{% url 'dish:index' %}" class="nav-link {{ dish_index }}">
                         <i class="nav-icon fas fa-pizza-slice"></i>
                         <p>Dishes</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'checkout:index' %}" class="nav-link {{ order_index }}">
+                        <i class="nav-icon fas fa-shopping-cart"></i>
+                        <p>Orders</p>
                     </a>
                 </li>
             </ul>

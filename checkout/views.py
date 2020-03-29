@@ -1,12 +1,21 @@
 from django.shortcuts import render
-from .models import OrderItem
+from .models import OrderItem, Order
 from .forms import OrderCreateForm
 from cart.cart import Cart
-from django.contrib.auth.models import User
+from dish.models import Dish
 
 
-def confirm(request):
-    return render(request, 'checkout/confirm.html')
+def index(request):
+    order = Order.objects.all()
+    dish = Dish.objects.all()
+    order_items = OrderItem.objects.all()
+    context = {
+        'order': order,
+        'dish': dish,
+        'order_items': order_items,
+        'order_index': 'active'
+    }
+    return render(request, 'checkout/index.html', context)
 
 
 def order_create(request):
